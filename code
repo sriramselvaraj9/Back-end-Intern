@@ -1,0 +1,83 @@
+Backend Intern Test - FastAPI Project Code
+
+main.py
+
+from fastapi import FastAPI from app.routers Import ops, client
+
+app FastAPI(title="Secure File Sharing System")
+
+app.include_router(ops.router, prefix="/ops", tags=["Ops User"]) app.include_router(client.router, prefix="/client", tags-["Client User"]).
+
+@app.get("/")
+
+def root(): return {"message": "Backend Intern Test Project Running"}
+
+app/routers/ops.py
+
+from fastapi import APIRouter
+
+router AP Router()
+
+@router.post("/login")
+
+def ops login():
+
+return {"message": "Ops user logged in"}
+
+@router.post("/upload-file")
+
+def upload_file():
+
+return {"message": "File uploaded successfully")
+
+app/routers/client.py
+
+from fastapi import APIRouter
+
+router APIRouter()
+
+@router.post("/signup")
+
+def client_signup():
+
+return {"message": "Client signed up"}
+
+@router.post("/verify-email")
+
+def verify_email():
+
+return {"message": "Verification email sent"}
+
+@router.post("/login")
+
+def client login(): return {"message": "Client logged in"}
+
+@router.get("/download-file/(assignment_id)")
+
+def download_file(assignment_id: str):
+
+return {
+
+"download-link": f"/download-file/(assignment_id}",
+
+"message": "success"
+
+}
+
+@router.get("/files")
+
+def list files():
+
+return {"files": []}
+
+tests/test_main.py
+
+from fastapi.testclient import TestClient
+
+from main import app
+
+client TestClient(app)
+
+def test_root():
+
+response client.get("/") assert response.status_code 200
